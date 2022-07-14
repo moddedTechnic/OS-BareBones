@@ -52,13 +52,13 @@ The structure for the header is given below:
 
 Some constants are required for the multiboot header to be recognised by the bootloader.
 
-| Constant   | Value                    | Purpose                                                                       |
-| ---------- | ------------------------ | ----------------------------------------------------------------------------- |
-| `ALIGN`    | `1<<0`                   | Specify that loaded modules should be aligned to page boundaries              |
-| `MEMINFO`  | `1<<1`                   | Tell the bootloader to provide us with a memory map                           |
-| `FLAGS`    | `ALIGN | MEMINFO | ...`  | Combine each of the flags into one field to be presented to the bootloader    |
-| `MAGIC`    |  `0x1BADB002`            | A magic number to tell the bootloader where the header is located             |
-| `CHECKSUM` | `-(MAGIC + FLAGS)`       | A checksum of the provided constants to prove that we have the correct format |
+| Constant   | Value                                  | Purpose                                                                       |
+| ---------- | ------------------------               | ----------------------------------------------------------------------------- |
+| `ALIGN`    | `1<<0`                                 | Specify that loaded modules should be aligned to page boundaries              |
+| `MEMINFO`  | `1<<1`                                 | Tell the bootloader to provide us with a memory map                           |
+| `FLAGS`    | Bitwise or of all the flags to be set  | Combine each of the flags into one field to be presented to the bootloader    |
+| `MAGIC`    |  `0x1BADB002`                          | A magic number to tell the bootloader where the header is located             |
+| `CHECKSUM` | `-(MAGIC + FLAGS)`                     | A checksum of the provided constants to prove that we have the correct format |
 
 
 ### Stack
