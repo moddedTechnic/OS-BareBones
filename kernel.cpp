@@ -72,7 +72,19 @@ void terminal_putentryat(char c, uint8_t colour, size_t x, size_t y) {
     terminal_buffer[y * VGA_WIDTH + x] = vga_entry(c, colour);
 }
 
+void terminal_writestring(const char* data);
+
 void terminal_putchar(char c) {
+    if (c == '\n') {
+        terminal_row++;
+        terminal_column = 0;
+        return;
+    }
+    if (c == '\t') {
+        terminal_writestring("    ");
+        return;
+    }
+
     terminal_putentryat(c, terminal_colour, terminal_column, terminal_row);
     if (++terminal_column == VGA_WIDTH) {
         terminal_column = 0;
@@ -97,6 +109,11 @@ void _kernel_main() {
 
     /* TODO: implement newline support */
     terminal_writestring("Hello kernel!\n");
+    terminal_writestring("Hello kernel!\n");
+    terminal_writestring("\tHello kernel!\n");
+    terminal_writestring("\tHello kernel!\n");
+    terminal_writestring("\t\tHello kernel!\n");
+    terminal_writestring("\t\tHello kernel!\n");
 }
 
 
